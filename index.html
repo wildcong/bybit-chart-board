@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101318" />
+    <meta
+      name="description"
+      content="바이비트 USDT 무기한 선물 차트를 한 페이지에서 확인하세요."
+    />
+    <title>PERP — Bybit Chart Board</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23101318'/%3E%3Cpath d='M18 44V22h12c15 0 15 18 0 18H18' stroke='%23e5b85b' stroke-width='6' fill='none'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./assets/board.css?v=1" />
+    <script src="./assets/vendor/lightweight-charts-5.0.9.js" defer></script>
+    <script src="./assets/market-client.js?v=1" defer></script>
+    <script src="./assets/board.js?v=1" defer></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">▥</span>
+        <div>
+          <h1>PERP<span class="brand-dot">.</span></h1>
+          <p>BYBIT CHART BOARD</p>
+        </div>
+      </div>
+      <div class="market-label">
+        <span class="dot"></span> USDT 무기한 <span class="divider">/</span>
+        <span id="marketCount">시장 연결 중</span>
+      </div>
+      <div class="connection">
+        <span id="connectionDot" class="dot pending"></span
+        ><span id="connectionText" role="status">연결 준비 중</span>
+      </div>
+    </header>
+    <main>
+      <section class="toolbar" aria-label="차트 설정">
+        <div class="toolbar-top">
+          <div class="tabs" role="group" aria-label="종목 목록">
+            <button id="allTab" class="tab selected" aria-pressed="true">
+              전체 종목</button
+            ><button id="favoritesTab" class="tab" aria-pressed="false">
+              ★ 관심종목 <span id="favoriteCount">0</span>
+            </button>
+          </div>
+          <div class="market-summary">
+            <span>24H · 전체 시장</span>
+            <div>
+              <b id="upCount">—</b> <span>상승</span><i></i
+              ><b id="downCount">—</b> <span>하락</span>
+            </div>
+          </div>
+          <div class="filters">
+            <label class="search"
+              ><span aria-hidden="true">⌕</span
+              ><input
+                id="search"
+                type="search"
+                placeholder="코인 검색 · BTC, ETH…"
+                aria-label="코인 검색"
+                autocomplete="off"
+                spellcheck="false" /></label
+            ><label class="sort-label"
+              ><span class="sr-only">종목 정렬</span
+              ><select id="sort">
+                <option value="turnover">거래대금순</option>
+                <option value="gainers">상승률순</option>
+                <option value="losers">하락률순</option>
+                <option value="name">이름순</option>
+              </select></label
+            >
+          </div>
+        </div>
+        <div class="toolbar-bottom">
+          <div
+            id="intervals"
+            class="intervals"
+            role="group"
+            aria-label="시간봉"
+          >
+            <button data-interval="1">1분</button
+            ><button data-interval="3">3분</button
+            ><button data-interval="5">5분</button
+            ><button data-interval="15" class="selected" aria-pressed="true">
+              15분</button
+            ><button data-interval="30">30분</button
+            ><button data-interval="60">60분</button
+            ><span class="interval-divider"></span
+            ><button data-interval="D">1일</button
+            ><button data-interval="2D">2일</button
+            ><button data-interval="W">주봉</button>
+          </div>
+          <div class="chart-options">
+            <label
+              ><input id="showEma" type="checkbox" checked /><span
+                >EMA 20 · 60</span
+              ></label
+            ><label
+              ><input id="showVolume" type="checkbox" checked /><span
+                >거래량</span
+              ></label
+            >
+          </div>
+        </div>
+      </section>
+      <div class="list-caption">
+        <span
+          ><strong id="resultCount">—</strong>개 종목
+          <span id="listDescription">· 거래대금순</span></span
+        ><span id="lastUpdated">공개 시세 · API 키 불필요</span>
+      </div>
+      <div id="notice" class="notice" role="alert" hidden></div>
+      <div id="cards" class="cards"></div>
+      <div id="empty" class="empty" hidden>
+        <span>⌕</span>
+        <h3>표시할 종목이 없습니다</h3>
+        <p id="emptyText">다른 검색어를 입력해보세요.</p>
+      </div>
+      <div id="loadSentinel" class="load-sentinel">
+        <button id="loadMore" hidden>다음 종목 불러오기</button>
+      </div>
+      <footer>
+        <span
+          >시세: Bybit · 차트:
+          <a href="https://www.tradingview.com/" target="_blank" rel="noopener"
+            >TradingView Lightweight Charts™</a
+          ></span
+        ><span
+          >2일봉: UTC 1970-01-01 기준 일봉 합산 · 날짜 표시는 한국시간</span
+        >
+      </footer>
+    </main>
+    <button id="toTop" class="to-top" aria-label="맨 위로 이동" hidden>
+      ↑
+    </button>
+  </body>
+</html>
